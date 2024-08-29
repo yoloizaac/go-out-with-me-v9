@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Cosmic Journey for Rene</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: #000;
+            color: #5abba9;
+            overflow: hidden;
+        }
+        #universe {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        #content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .hidden {
+            display: none;
+        }
+        .fade-in {
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .btn {
+            background: transparent;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .btn:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 20px #00ffff;
+        }
+        #puzzleInput {
+            background: transparent;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        #finalMessage {
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="universe"></div>
+    <div id="content">
+        <div id="intro">
+            <h1>Cosmic Journey Awaits</h1>
+            <p>Are you ready to explore the universe with me?</p>
+            <button class="btn" onclick="startJourney()">Launch Mission</button>
+        </div>
+        <div id="journey" class="hidden">
+            <h2>Navigating the Cosmos</h2>
+            <p>As we zoom past galaxies, a mysterious message appears...</p>
+            <button class="btn" onclick="showRiddle()">Decode Message</button>
+        </div>
+        <div id="riddle" class="hidden">
+            <h2>Cosmic Riddle</h2>
+            <p>"I am a vessel of worlds, a portal to imagination. Silent, yet speak volumes. What am I?"</p>
+            <input type="text" id="puzzleInput" placeholder="Enter your answer">
+            <button class="btn" onclick="checkAnswer()">Submit Answer</button>
+        </div>
+        <div id="finalMessage" class="hidden">
+            <h2>Cosmic Connection Found!</h2>
+            <p>HEY, our journey through the stars has led us here...</p>
+            <p>Would you join me for a down-to-earth adventure?</p>
+            <p>Let's explore a universe of stories at the bookstore,</p>
+            <p>followed by charting our own constellations over coffee.</p>
+            <p>This Saturday, 3 PM - Our own space-time rendezvous.</p>
+            <p>Are you ready to co-author this cosmic tale?</p>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const universe = document.getElementById('universe');
+            for (let i = 0; i < 1000; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDuration = Math.random() * 3 + 2 + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                universe.appendChild(star);
+            }
+        }
+
+        function startJourney() {
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('journey').classList.remove('hidden');
+            document.getElementById('journey').classList.add('fade-in');
+            animateHyperdrive();
+        }
+
+        function animateHyperdrive() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.style.animation = 'none';
+                star.offsetHeight; // Trigger reflow
+                star.style.animation = `twinkle 1s infinite alternate, hyperdrive 5s linear`;
+            });
+        }
+
+        function showRiddle() {
+            document.getElementById('journey').classList.add('hidden');
+            document.getElementById('riddle').classList.remove('hidden');
+            document.getElementById('riddle').classList.add('fade-in');
+        }
+
+        function checkAnswer() {
+            const answer = document.getElementById('puzzleInput').value.toLowerCase().trim();
+            if (answer === 'book' || answer === 'a book') {
+                revealFinalMessage();
+            } else {
+                alert("Not quite! Let's recalibrate our cosmic compass and try again.");
+            }
+        }
+
+        function revealFinalMessage() {
+            document.getElementById('riddle').classList.add('hidden');
+            document.getElementById('finalMessage').classList.remove('hidden');
+            document.getElementById('finalMessage').classList.add('fade-in');
+            celebrateCosmic();
+        }
+
+        function celebrateCosmic() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.style.animation = 'none';
+                star.offsetHeight; // Trigger reflow
+                star.style.animation = `twinkle 0.5s infinite alternate, celebrate 3s linear infinite`;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            createStars();
+        });
+
+        // Add hyperdrive and celebrate animations
+        document.styleSheets[0].insertRule(`
+            @keyframes hyperdrive {
+                from { transform: translateZ(0px); }
+                to { transform: translateZ(1000px); }
+            }
+        `, document.styleSheets[0].cssRules.length);
+
+        document.styleSheets[0].insertRule(`
+            @keyframes celebrate {
+                0% { transform: scale(1); }
+                50% { transform: scale(2); }
+                100% { transform: scale(1); }
+            }
+        `, document.styleSheets[0].cssRules.length);
+    </script>
+</body>
+</html>
