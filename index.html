@@ -165,10 +165,10 @@
 
         function checkAnswer() {
             const answer = document.getElementById('puzzleInput').value.toLowerCase().trim();
-            if (answer === 'book' || answer === 'a book') {
+            if (answer === 'book' || answer === 'Book'|| answer === 'BOOK') {
                 revealFinalMessage();
             } else {
-                alert("Not quite! Let's recalibrate our cosmic compass and try again.");
+                alert("Not quite! Let's recalibrate our cosmic compass and try again. It's one word and its something people find in a BOOKSTORE. You spend money on it!");
             }
         }
 
